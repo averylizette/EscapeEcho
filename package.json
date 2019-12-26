@@ -1,13 +1,12 @@
 {
-  "name": "calendar",
+  "name": "escapeecho",
   "version": "1.0.0",
-  "description": "",
+  "description": "A discussion platform designed to help users break out of their echo chambers.",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "react-dev": "webpack -w",
-    "start": "nodemon ./server/index.js",
-    "seed-db": "node ./database/seedDB.js"
+    "start": "nodemon ./server/index.js"
   },
   "keywords": [],
   "author": "",
