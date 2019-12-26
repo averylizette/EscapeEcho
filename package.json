@@ -1,0 +1,19 @@
+{
+  "name": "escape-echo",
+  "version": "1.0.0",
+  "description": "A discussion app for breaking out of your local echo chamber",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/averylizette/EscapeEcho.git"
+  },
+  "author": "Avery Neil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/averylizette/EscapeEcho/issues"
+  },
+  "homepage": "https://github.com/averylizette/EscapeEcho#readme"
+}
