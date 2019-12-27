@@ -11,6 +11,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(bodyparser.json());
 
 mongoose.connect(config.db_dev);
+require('./routes')(app);
 
 
 app.listen(PORT, () => console.log('Listening on port: ' + PORT));

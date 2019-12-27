@@ -8,9 +8,10 @@ module.exports = (app) => {
     const { 
         firstName,
         lastName,
-        email,
         password 
     } = body;
+
+    let {email} = body;
 
     if (!firstName) {
         // res.end: Use to quickly end the 
@@ -30,7 +31,6 @@ module.exports = (app) => {
             message: 'Error: missing last name'
         })
     }
-
     
     if (!email) {
         return res.send({
@@ -47,6 +47,7 @@ module.exports = (app) => {
     }
     email = email.toLowerCase();
     email = email.trim();
+    
     // verify email doesn't exist and if it doesnt then save
     User.find({
       email: email
