@@ -18,65 +18,67 @@ module.exports = (app) => {
         // could do something like:
         //res.end()
         //res.status(404).end()
-        
-        res.end({
+        return res.send({
             success: false,
             message: 'Error: missing first name'
         })
     }
 
     if (!lastName) {
-        res.end({
+        return res.send({
             success: false,
-            message: 'Error: missing first name'
+            message: 'Error: missing last name'
         })
     }
 
     
     if (!email) {
-      return res.send({
+        return res.send({
         success: false,
         message: 'Error: Email cannot be blank.'
       });
     }
 
     if (!password) {
-      return res.send({
+        return res.send({
         success: false,
         message: 'Error: Password cannot be blank.'
       });
     }
     email = email.toLowerCase();
     email = email.trim();
-    // Steps:
-    // 1. Verify email doesn't exist
-    // 2. Save
+    // verify email doesn't exist and if it doesnt then save
     User.find({
       email: email
     }, (err, previousUsers) => {
       if (err) {
-        return res.send({
+          // ??? do I need or want the return statement here and in the following else if ???
+          // return res.send vs not returning return res.send()
+          return res.send({
           success: false,
-          message: 'Error: Server error'
+          message: 'Error: error in signin.js when trying to look up the email. User probably doesnt exist in our system'
         });
       } else if (previousUsers.length > 0) {
-        return res.send({
+          return res.send({
           success: false,
           message: 'Error: Account already exist.'
         });
       }
+
       // Save the new user
       const newUser = new User();
       newUser.email = email;
+      newUser.firstName = firstName
+      newUser.lastName = lastName
       newUser.password = newUser.generateHash(password);
       newUser.save((err, user) => {
         if (err) {
-          return res.send({
+            return res.send({
             success: false,
-            message: 'Error: Server error'
+            message: 'Error: Server error, unable to save user'
           });
         }
-        return res.send({
+          return res.send({
           success: true,
           message: 'Signed up'
         });
@@ -84,3 +86,6 @@ module.exports = (app) => {
     });
   }); // end of sign up endpoint
 };
+
+
+//TODO: validate email
