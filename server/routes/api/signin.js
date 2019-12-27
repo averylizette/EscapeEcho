@@ -1,5 +1,6 @@
 // This file will contain all endpoints related to logging in.
 const User = require('../../models/User')
+const UserSession = require('../../models/UserSession')
 
 module.exports = (app) => {
  
@@ -86,7 +87,110 @@ module.exports = (app) => {
       });
     });
   }); // end of sign up endpoint
+
+  //sign in
+
+  app.post('/api/account/signin', (req, res, next) => {
+    const { body } = req;
+    const { password } = body;
+    let {email} = body;
+
+    if (!email) {
+        return res.send({
+        success: false,
+        message: 'Error: Email cannot be blank. (login)'
+      });
+    }
+
+    if (!password) {
+        return res.send({
+        success: false,
+        message: 'Error: Password cannot be blank. (login)'
+      });
+    }
+
+    email = email.toLowerCase();
+    // now we need to find the user and validate their password 
+    User.find({email: email}, (err, users) => {
+        if (err) {
+        return res.send({
+            success: false,
+            message: 'Error: Email not found in system (login)'
+            });
+        }
+        if (users.length !== 1) {
+            return res.send({
+                success: false,
+                message: 'No user was found matching this email'
+                });
+        }
+        const user = users[0]
+        if (!user.validPassword(password)) {
+            return res.send({
+                success: false,
+                message: 'Invalid password'
+            });
+        }
+        // otherwise create user session
+
+        const userSession = new UserSession()
+
+        userSession.userId = user._id // Mongo has an automatic userid, so this is the id returned from the search result 
+        userSession.save((err, doc) => { // chance doc to session for clarity TODO
+            if (err) {
+                return res.send({
+                    success: false,
+                    message: 'Failed to save user session'
+                });
+            }
+            return res.send({
+                success: true,
+                message: 'Valid sign in',
+                token: doc._id
+            })
+        })
+
+    })
+
+  });
+
+  app.get('/api/account/verify', (req, res, next) => {
+      /*steps:
+      get the token
+      verify the token is one of a kind and not deleted
+      */
+     const { query } = req;
+     const { token } = query;
+
+     UserSession.find({
+         _id: token,
+         isDeleted: false
+     }, (err, sessions) => {
+        if (err) {
+            return res.send({
+                success: false,
+                message: "Error: Failed to validate session"
+            })
+        }
+
+        if (sessions.length !== 1) {
+            return res.send({
+                success: false,
+                message: "Error: Number of sessions are either 0 or more than one"
+            })
+        } else {
+            return res.send({
+                success: true,
+                message: "Valid session"
+            })
+        }
+     })
+
+  });
+
 };
 
 
 //TODO: validate email
+// TODO: modularize functions 
+// TODO: Promises
