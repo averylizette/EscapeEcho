@@ -7,7 +7,9 @@ const bodyparser = require('body-parser');
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(bodyparser.json());
 
-
+app.get('/', (req, res) => {
+  res.render()
+})
 
 
 app.listen(PORT, () => console.log('Listening on port: ' + PORT));

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Login from './components/Login.jsx'
 
 
-ReactDOM.render(<div>Hello World</div>, document.getElementById('app'));
+ReactDOM.render(<Login/>, document.getElementById('app'));
