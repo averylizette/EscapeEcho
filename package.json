@@ -46,7 +46,8 @@
     "pg": "^7.14.0",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "whatwg-fetch": "^3.0.0"
   },
   "babel": {
     "presets": [
