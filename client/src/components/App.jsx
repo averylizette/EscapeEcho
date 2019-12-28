@@ -54,13 +54,26 @@ class App extends Component {
         if (!token) {
             return (
                 <div>
+                    <div>
+                       <p>sign in</p>
+                        <input type="email" placeholder="Email"/><br/>
+                        <input type="password" placeholder="Password"/><br/>
+                        <button>Sign In</button>
+                    </div>
+                    <br/>
+                    <br/>
                     <p>sign up</p>
+                    <input type="text" placeholder="First Name"/><br/>
+                    <input type="text" placeholder="Last Name"/><br/>
+                    <input type="email" placeholder="Email"/><br/>
+                    <input type="password" placeholder="Password"/><br/>
+                    <button>Sign Up</button>
                 </div>
             )
         }
         return (
             <div>
-                App 
+                <p>Account</p>
             </div>
         );
     }

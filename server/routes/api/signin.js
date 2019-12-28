@@ -86,9 +86,7 @@ module.exports = (app) => {
         });
       });
     });
-  }); // end of sign up endpoint
-
-  //sign in
+  }); 
 
   app.post('/api/account/signin', (req, res, next) => {
     const { body } = req;
