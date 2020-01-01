@@ -9,6 +9,18 @@ class Login extends Component {
         
     }
 
+    onChangeSignInEmail(event) {
+        this.setState({
+            signInEmail: event.target.value
+        })
+    }
+
+    onChangeSignInPassword(event) {
+        this.setState({
+            signInPassword: event.target.value
+        })
+    }
+
     
     
     render() {

@@ -6,6 +6,7 @@ module.exports = (app) => {
  
   app.post('/api/account/signup', (req, res, next) => {
     const { body } = req;
+    console.log(body)
     const { 
         firstName,
         lastName,
@@ -13,6 +14,7 @@ module.exports = (app) => {
     } = body;
 
     let {email} = body;
+    
 
     if (!firstName) {
         // res.end: Use to quickly end the 
