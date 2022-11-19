@@ -24,7 +24,7 @@
     "morgan": "^1.9.1",
     "nodemon": "^1.19.4",
     "webpack": "^4.41.0",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "axios": "^0.19.0",
